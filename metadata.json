@@ -1,0 +1,5 @@
+{
+  "name": "Multi_Checklist_netlifybuild",
+  "description": "A clean and simple checklist application inspired by the Checklist Manifesto. Create structured checklists with sections and indentation, and print them easily.",
+  "requestFramePermissions": []
+}
