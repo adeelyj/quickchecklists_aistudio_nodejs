@@ -174,27 +174,26 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
               onDragEnd={handleDragEnd}
             />
         ))}
+         <div className="no-print flex flex-col gap-3 pt-4">
+            <form onSubmit={handleAddItem} className="flex items-center gap-2">
+              <input
+                type="text"
+                value={newItemText}
+                onChange={(e) => setNewItemText(e.target.value)}
+                onKeyDown={handleInputKeyDown}
+                placeholder="Add a new item..."
+                className="flex-grow bg-white p-2 text-sm text-black border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              />
+              <button type="submit" className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition-colors shrink-0" aria-label="Add new item">
+                <PlusIcon />
+              </button>
+            </form>
+            <div className="flex">
+              <button onClick={handleAddSection} className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md border border-gray-300 transition-colors">Add Section</button>
+            </div>
+        </div>
       </div>
        
-      <div className="no-print flex flex-col gap-3 pt-2">
-          <form onSubmit={handleAddItem} className="flex items-center gap-2">
-            <input
-              type="text"
-              value={newItemText}
-              onChange={(e) => setNewItemText(e.target.value)}
-              onKeyDown={handleInputKeyDown}
-              placeholder="Add a new item..."
-              className="flex-grow bg-white p-2 text-sm text-black border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-            />
-            <button type="submit" className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition-colors shrink-0" aria-label="Add new item">
-              <PlusIcon />
-            </button>
-          </form>
-          <div className="flex">
-            <button onClick={handleAddSection} className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md border border-gray-300 transition-colors">Add Section</button>
-          </div>
-      </div>
-      
       <div className="flex flex-col md:flex-row justify-between items-start gap-6 mt-auto pt-6 border-t border-gray-200">
           <div className="w-full md:flex-1">
             <label className="text-xs text-gray-500">Checklist created by:</label>
