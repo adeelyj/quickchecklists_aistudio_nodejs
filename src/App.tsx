@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 import type { ChecklistStateType } from './types';
 import { Checklist } from './components/Checklist';
 import { SpinnerIcon } from './components/icons/SpinnerIcon';
-import { AddChecklistIcon } from './components/icons/AddChecklistIcon';
+import { PlusIcon } from './components/icons/PlusIcon';
 
 const createNewChecklist = (): ChecklistStateType => ({
   id: Date.now(),
@@ -17,7 +17,7 @@ const createNewChecklist = (): ChecklistStateType => ({
 });
 
 const App: React.FC = () => {
-  const [checklists, setChecklists] = useState<ChecklistStateType[]>([createNewChecklist(), createNewChecklist()]);
+  const [checklists, setChecklists] = useState<ChecklistStateType[]>([createNewChecklist()]);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState<boolean>(false);
   
   const printableRef = useRef<HTMLDivElement>(null);
@@ -97,22 +97,23 @@ const App: React.FC = () => {
   const isLandscape = checklists.length > 1;
 
   return (
-    <div className="bg-white min-h-screen w-full flex flex-col items-center p-4 sm:p-6 lg:p-8">
-       <div className="w-full max-w-7xl mx-auto flex flex-col">
-        <div className="w-full no-print mb-4">
-          <h1 className="text-2xl font-bold mb-4">Page Layout</h1>
-          <div className="flex items-end gap-4">
-            <button onClick={addChecklist} disabled={checklists.length >= 3} className="disabled:opacity-50 disabled:cursor-not-allowed">
-              <AddChecklistIcon />
-            </button>
-            <div className="pb-1">
-              <p className="font-semibold">Add Checklist &nbsp; {checklists.length} / 3 Checklists</p>
-            </div>
-          </div>
-        </div>
+    <div className="bg-gray-100 min-h-screen w-full flex flex-col items-center p-4 sm:p-6 lg:p-8">
+       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
         
-        <div className="w-full h-1 bg-gradient-to-b from-gray-400 to-gray-200 mb-2"></div>
-
+        <header className="w-full max-w-3xl bg-white rounded-xl shadow-md p-4 mb-8 no-print">
+          <h1 className="text-center text-lg font-bold text-gray-800 mb-3">Page Layout</h1>
+          <div className="flex justify-center items-center gap-4">
+            <button 
+              onClick={addChecklist} 
+              disabled={checklists.length >= 3} 
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <PlusIcon />
+              <span>Add Checklist</span>
+            </button>
+            <p className="text-sm text-gray-600 font-medium w-28">{checklists.length} / 3 Checklists</p>
+          </div>
+        </header>
 
         <main 
             id="printable-area"

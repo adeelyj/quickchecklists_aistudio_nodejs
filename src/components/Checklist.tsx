@@ -3,6 +3,7 @@ import type { ChecklistStateType, ChecklistItemType } from '../types';
 import { ChecklistItem } from './ChecklistItem';
 import { useKeystrokeSound } from '../hooks/useKeystrokeSound';
 import { XIcon } from './icons/XIcon';
+import { PlusIcon } from './icons/PlusIcon';
 
 interface ChecklistProps {
   checklist: ChecklistStateType;
@@ -112,7 +113,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 h-full w-full overflow-y-auto relative flex flex-col gap-2">
+    <div className="p-4 sm:p-6 lg:p-8 h-full w-full overflow-y-auto relative flex flex-col gap-6 bg-white">
       {canRemove && (
         <button
           onClick={() => onRemove(checklist.id)}
@@ -128,16 +129,16 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
         onChange={(e) => handleFieldChange('title', e.target.value)}
         onKeyDown={handleInputKeyDown}
         placeholder="Checklist Title"
-        className="text-lg font-bold w-full bg-transparent outline-none p-2 border border-gray-400 text-black checklist-title"
+        className="text-2xl font-black tracking-wider uppercase bg-transparent w-full border-0 border-b-4 border-black pb-2 focus:outline-none focus:ring-0 focus:border-black checklist-title"
       />
       
-      <div className="flex gap-2">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         <div className="flex-1">
-            <label className="text-xs text-gray-600">Type</label>
+            <label className="text-xs text-gray-500">Type</label>
             <select 
                 value={checklist.checklistType} 
                 onChange={e => handleFieldChange('checklistType', e.target.value as any)}
-                className="w-full bg-transparent text-sm text-black outline-none border border-gray-400 p-2"
+                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             >
                 <option value=""></option>
                 <option value="DO-CONFIRM">DO-CONFIRM</option>
@@ -145,19 +146,38 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
             </select>
         </div>
         <div className="flex-1">
-            <label className="text-xs text-gray-600">Context</label>
+            <label className="text-xs text-gray-500">Context</label>
             <input
               type="text"
               value={checklist.context}
               onChange={(e) => handleFieldChange('context', e.target.value)}
               onKeyDown={handleInputKeyDown}
               placeholder="Description of checklist"
-              className="w-full bg-transparent text-sm text-black outline-none border border-gray-400 p-2"
+              className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             />
         </div>
       </div>
       
-      <div className="flex-grow space-y-1 py-2">
+       <div className="no-print flex flex-col gap-3 pt-2">
+          <form onSubmit={handleAddItem} className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newItemText}
+              onChange={(e) => setNewItemText(e.target.value)}
+              onKeyDown={handleInputKeyDown}
+              placeholder="Add a new item..."
+              className="flex-grow bg-white p-2 text-sm text-black border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            />
+            <button type="submit" className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition-colors shrink-0" aria-label="Add new item">
+              <PlusIcon />
+            </button>
+          </form>
+          <div className="flex">
+            <button onClick={handleAddSection} className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md border border-gray-300 transition-colors">Add Section</button>
+          </div>
+      </div>
+
+      <div className="flex-grow space-y-1 py-2 min-h-[100px]">
         {checklist.items.map((item) => (
             <ChecklistItem
               key={item.id}
@@ -174,44 +194,28 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
             />
         ))}
       </div>
-
-      <div className="no-print flex flex-col gap-2">
-          <form onSubmit={handleAddItem} className="flex items-center gap-2">
-            <input
-              type="text"
-              value={newItemText}
-              onChange={(e) => setNewItemText(e.target.value)}
-              onKeyDown={handleInputKeyDown}
-              placeholder="Add a new item..."
-              className="flex-grow bg-white p-2 text-sm text-black border border-gray-400 outline-none"
-            />
-          </form>
-          <div className="flex">
-            <button onClick={handleAddSection} className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1 border border-gray-400 transition-colors">Add Section</button>
-          </div>
-      </div>
       
-      <div className="flex flex-col gap-2">
-          <div className="flex items-center">
-            <label className="text-sm text-gray-600 mr-2 whitespace-nowrap">Checklist created by:</label>
+      <div className="flex flex-col md:flex-row justify-between items-start gap-6 mt-auto pt-6 border-t border-gray-200">
+          <div className="w-full md:flex-1">
+            <label className="text-xs text-gray-500">Checklist created by:</label>
             <input
                 type="text"
                 value={checklist.createdBy}
                 onChange={(e) => handleFieldChange('createdBy', e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="<Name>"
-                className="w-full bg-transparent text-sm text-black outline-none border border-gray-400 p-2"
+                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             />
           </div>
-          <div className="flex items-center">
-              <label className="text-sm text-gray-600 mr-2 whitespace-nowrap">Checklist completed by:</label>
+          <div className="w-full md:flex-1">
+              <label className="text-xs text-gray-500">Checklist completed by:</label>
               <input
                 type="text"
                 value={checklist.completedBy}
                 onChange={(e) => handleFieldChange('completedBy', e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="<Name>"
-                className="w-full bg-transparent text-sm text-black outline-none border border-gray-400 p-2"
+                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
               />
           </div>
       </div>
