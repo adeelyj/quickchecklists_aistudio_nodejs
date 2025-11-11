@@ -86,7 +86,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = React.memo(({
       onDragOver={(e) => e.preventDefault()}
       className={`flex items-center group rounded-sm transition-all duration-200 ${
         isDragging ? 'opacity-30 bg-gray-200' : 'opacity-100'
-      }`}
+      } ${isSection ? 'border-t border-b border-gray-200 my-2 py-1' : ''}`}
       style={{ paddingLeft: isSection ? '0' : `${item.indentation * 1.5}rem` }}
     >
       <div className="cursor-move text-gray-400 mr-1 touch-none no-print" aria-label="Drag to reorder">
