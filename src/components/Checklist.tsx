@@ -129,7 +129,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
         onChange={(e) => handleFieldChange('title', e.target.value)}
         onKeyDown={handleInputKeyDown}
         placeholder="Checklist Title"
-        className="text-2xl font-black tracking-wider uppercase bg-transparent w-full border-0 border-b-4 border-black pb-2 focus:outline-none focus:ring-0 focus:border-black checklist-title"
+        className="text-2xl font-black tracking-wider bg-transparent w-full border-0 border-b-4 border-black pb-2 focus:outline-none focus:ring-0 focus:border-black checklist-title"
       />
       
       <div className="flex flex-col md:flex-row gap-6 md:gap-8">
@@ -138,7 +138,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
             <select 
                 value={checklist.checklistType} 
                 onChange={e => handleFieldChange('checklistType', e.target.value as any)}
-                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
+                className="w-full bg-transparent text-sm text-black py-1 px-0 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             >
                 <option value=""></option>
                 <option value="DO-CONFIRM">DO-CONFIRM</option>
@@ -153,7 +153,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
               onChange={(e) => handleFieldChange('context', e.target.value)}
               onKeyDown={handleInputKeyDown}
               placeholder="Description of checklist"
-              className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
+              className="w-full bg-transparent text-sm text-black py-1 px-0 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             />
         </div>
       </div>
@@ -203,7 +203,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
                 onChange={(e) => handleFieldChange('createdBy', e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="<Name>"
-                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
+                className="w-full bg-transparent text-sm text-black py-1 px-0 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
             />
           </div>
           <div className="w-full md:flex-1">
@@ -214,7 +214,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ checklist, onUpdate, onRem
                 onChange={(e) => handleFieldChange('completedBy', e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="<Name>"
-                className="w-full bg-transparent text-sm text-black p-2 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
+                className="w-full bg-transparent text-sm text-black py-1 px-0 mt-1 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-colors"
               />
           </div>
       </div>
